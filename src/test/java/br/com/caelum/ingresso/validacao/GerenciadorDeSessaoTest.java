@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -22,8 +23,8 @@ public class GerenciadorDeSessaoTest {
 
     @Before
     public void setUp() throws Exception {
-        rogueOne = new Filme("Rogue One", Duration.ofMinutes(120), "SCI-FI");
-        sala3D = new Sala("Sala 3D");
+        rogueOne = new Filme("Rogue One", Duration.ofMinutes(120), "SCI-FI", BigDecimal.ONE);
+        sala3D = new Sala("Sala 3D", BigDecimal.TEN);
         sessaoDasDez = new Sessao(LocalTime.parse("10:00:00"), sala3D, rogueOne);
         sessaoDasTreze = new Sessao(LocalTime.parse("13:00:00"), sala3D, rogueOne);
         sessaoDasDezoito = new Sessao(LocalTime.parse("18:00:00"), sala3D, rogueOne);
