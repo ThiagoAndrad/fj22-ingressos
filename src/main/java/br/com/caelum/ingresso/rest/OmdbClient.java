@@ -1,6 +1,5 @@
 package br.com.caelum.ingresso.rest;
 
-import br.com.caelum.ingresso.model.DetalhesDoFilme;
 import br.com.caelum.ingresso.model.Filme;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
@@ -11,7 +10,7 @@ import java.util.Optional;
 @Component
 public class OmdbClient {
 
-    public Optional<DetalhesDoFilme> request(Filme filme) {
+    public <T> Optional<T> request(Filme filme, Class<T> tClass) {
         RestTemplate client = new RestTemplate();
 
         String titulo = filme.getNome().replace(" ", "+");
@@ -19,9 +18,9 @@ public class OmdbClient {
         String url = String.format("https://omdb-fj22.herokuapp.com/movie?title=%s", titulo);
 
         try {
-            DetalhesDoFilme detalhesDoFilme = client.getForObject(url, DetalhesDoFilme.class);
+            T response = client.getForObject(url, tClass);
 
-            return Optional.ofNullable(detalhesDoFilme);
+            return Optional.ofNullable(response);
 
         } catch (RestClientException e ) {
             return Optional.empty();
